@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import prisma from '@/lib/db'
 
 export async function POST() {
   try {
     // Find the product with the specific name
-    const product = await db.product.findFirst({
+    const product = await prisma.product.findFirst({
       where: {
         name: 'Luxury Watch'
       }
@@ -15,7 +15,7 @@ export async function POST() {
     }
 
     // Delete the product
-    await db.product.delete({
+    await prisma.product.delete({
       where: {
         id: product.id
       }
@@ -26,4 +26,4 @@ export async function POST() {
     console.error('Error deleting product:', error)
     return NextResponse.json({ error: 'Failed to delete product' }, { status: 500 })
   }
-} 
+}

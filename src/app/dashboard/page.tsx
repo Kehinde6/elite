@@ -96,7 +96,6 @@ export default function DashboardPage() {
                   name={product.name}
                   price={product.price}
                   image={product.image}
-                  brand={product.brand}
                 />
                 <button
                   onClick={async (e) => {
