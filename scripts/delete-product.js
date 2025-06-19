@@ -3,7 +3,7 @@ import db from '@/lib/db'
 async function deleteProduct() {
   try {
     // Find the product with the specific name and price
-    const product = await prisma.product.findFirst({
+    const product = await db.product.findFirst({
       where: {
         name: 'Luxury Watch',
         price: 2799.99
@@ -16,7 +16,7 @@ async function deleteProduct() {
     }
 
     // Delete the product
-    await prisma.product.delete({
+    await db.product.delete({
       where: {
         id: product.id
       }
@@ -26,8 +26,8 @@ async function deleteProduct() {
   } catch (error) {
     console.error('Error deleting product:', error)
   } finally {
-    await prisma.$disconnect()
+    await db.$disconnect()
   }
 }
 
-deleteProduct() 
+deleteProduct()
