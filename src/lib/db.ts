@@ -8,4 +8,5 @@ if (process.env.NODE_ENV !== 'production') {
   globalWithDb.db = db
 }
 
+export { db }
 export default db
