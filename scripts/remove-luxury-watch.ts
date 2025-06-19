@@ -1,11 +1,9 @@
-const { PrismaClient } = require('@prisma/client')
-
-const prisma = new PrismaClient()
+import db from '@/lib/db'
 
 async function removeLuxuryWatch() {
   try {
-    // First, delete all external links and comments associated with the product
-    const product = await prisma.product.findFirst({
+    // Find the product
+    const product = await db.product.findFirst({
       where: {
         name: 'Luxury Watch'
       }
@@ -17,21 +15,21 @@ async function removeLuxuryWatch() {
     }
 
     // Delete associated external links
-    await prisma.externalLink.deleteMany({
+    await db.externalLink.deleteMany({
       where: {
         productId: product.id
       }
     })
 
     // Delete associated comments
-    await prisma.comment.deleteMany({
+    await db.comment.deleteMany({
       where: {
         productId: product.id
       }
     })
 
     // Delete the product
-    await prisma.product.delete({
+    await db.product.delete({
       where: {
         id: product.id
       }
@@ -41,8 +39,8 @@ async function removeLuxuryWatch() {
   } catch (error) {
     console.error('Error:', error)
   } finally {
-    await prisma.$disconnect()
+    await db.$disconnect()
   }
 }
 
-removeLuxuryWatch() 
+removeLuxuryWatch()

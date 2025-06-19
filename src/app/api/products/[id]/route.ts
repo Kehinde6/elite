@@ -50,7 +50,7 @@ export async function PUT(
       const path = join(process.cwd(), 'public', 'uploads', filename);
 
       // Delete old image
-      const product = await prisma.product.findUnique({
+      const product = await db.product.findUnique({
         where: { id: params.id },
       });
       if (product?.image) {
@@ -67,7 +67,7 @@ export async function PUT(
     }
 
     // Update product
-    const updatedProduct = await prisma.product.update({
+    const updatedProduct = await db.product.update({
       where: { id: params.id },
       data: updateData,
     });
@@ -96,7 +96,7 @@ export async function DELETE(
     }
 
     // Delete product image
-    const product = await prisma.product.findUnique({
+    const product = await db.product.findUnique({
       where: { id: params.id },
     });
     if (product?.image) {
@@ -109,7 +109,7 @@ export async function DELETE(
     }
 
     // Delete product
-    await prisma.product.delete({
+    await db.product.delete({
       where: { id: params.id },
     });
 
@@ -133,7 +133,7 @@ export async function GET(
   try {
     console.log('Product details API route called for ID:', params.id);
     
-    const product = await prisma.product.findUnique({
+    const product = await db.product.findUnique({
       where: {
         id: params.id
       },

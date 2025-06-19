@@ -1,6 +1,4 @@
-const { PrismaClient } = require('@prisma/client')
-
-const prisma = new PrismaClient()
+import db from '@/lib/db'
 
 async function deleteProduct() {
   try {

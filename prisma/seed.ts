@@ -1,12 +1,10 @@
 import db from '@/lib/db'
 import { hash } from 'bcrypt';
 
-const prisma = new PrismaClient();
-
 async function main() {
   // Create admin user
   const adminPassword = await hash('admin123', 12);
-  const admin = await prisma.user.upsert({
+  const admin = await db.user.upsert({
     where: { email: 'admin@example.com' },
     update: {},
     create: {
@@ -18,7 +16,7 @@ async function main() {
   });
 
   // Create Rolex Daytona Rainbow
-  const rolexRainbow = await prisma.product.create({
+  const rolexRainbow = await db.product.create({
     data: {
       name: 'Rolex Rainbow Sapphire Daytona Chronograph',
       description: '18kt rose gold case with a gold-tone 18kt rose gold bracelet. Fixed 36 baguette-cut sapphires bezel. Black dial with gold-tone hands and diamond hour markers. Dial Type: Analog. Chronograph - three sub-dials displaying: 60 second, 30 minute and 12 hour. Rolex Calibre 4130 automatic movement with a 72-hour power reserve. Scratch resistant sapphire crystal. Screw down crown. Solid case back. Round case shape. Case size: 40 mm. Water resistant at 100 meters / 330 feet. Functions: chronograph, hour, minute, small second, chronometer. Luxury watch style. Watch label: Swiss Made.',
@@ -70,7 +68,7 @@ async function main() {
   });
 
   // Create Rolex product
-  const rolex = await prisma.product.create({
+  const rolex = await db.product.create({
     data: {
       name: 'Rolex Daytona Yellow Gold - Bracelet',
       description: '40mm 18K yellow gold case, screw-down back, screw-down crown and push buttons with Triplock triple waterproofness, fixed 18K yellow gold bezel with engraved tachymetric scale, scratch-resistant sapphire crystal, white dial, index hour markers, Rolex calibre 4130 self-winding movement with chronograph central second hand, 30-minute counter at 3 o\'clock, and 12-hour counter at 9 o\'clock, approximately 72 hours of power reserve, 18K yellow gold Oyster bracelet with flat three-piece links, folding Oysterlock buckle with Easylink 5mm comfort extension link. Waterproof to 100 meters.',
@@ -129,7 +127,7 @@ async function main() {
   });
 
   // Create Patek Philippe product
-  const patekPhilippe = await prisma.product.create({
+  const patekPhilippe = await db.product.create({
     data: {
       name: 'Patek Philippe Nautilus 5726/1A with 34.65 Ct VS Diamond',
       description: `Model/SKU: WTCH-31215
@@ -204,7 +202,7 @@ Includes original Patek Philippe box/papers and a lab report for diamonds.`,
   });
 
   // Create Designer Handbag product
-  const designerHandbag = await prisma.product.create({
+  const designerHandbag = await db.product.create({
     data: {
       name: 'Designer Handbag',
       description: 'Exclusive designer handbag crafted from the finest leather.',
@@ -227,7 +225,7 @@ Includes original Patek Philippe box/papers and a lab report for diamonds.`,
   });
 
   // Create Patek Philippe Grand Complications
-  const patekCelestial = await prisma.product.create({
+  const patekCelestial = await db.product.create({
     data: {
       name: 'Patek Philippe Grand Complications 6102P-001',
       description: `Highlighting Patek Philippe's great tradition of astronomical watches, the Celestial devotes its dial to a rotating chart of the heavenly bodies. This exquisite timepiece features:
@@ -302,5 +300,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect();
+    await db.$disconnect();
   }); 

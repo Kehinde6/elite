@@ -176,7 +176,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const links = await prisma.externalLink.findMany({
+    const links = await db.externalLink.findMany({
       where: {
         productId: params.id
       }
@@ -195,7 +195,7 @@ export async function POST(
 ) {
   try {
     const body = await request.json();
-    const link = await prisma.externalLink.create({
+    const link = await db.externalLink.create({
       data: {
         ...body,
         productId: params.id

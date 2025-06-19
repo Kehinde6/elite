@@ -4,7 +4,7 @@ import db from '@/lib/db'
 export async function POST() {
   try {
     // Find the product with the specific name
-    const product = await prisma.product.findFirst({
+    const product = await db.product.findFirst({
       where: {
         name: 'Luxury Watch'
       }
@@ -15,7 +15,7 @@ export async function POST() {
     }
 
     // Delete the product
-    await prisma.product.delete({
+    await db.product.delete({
       where: {
         id: product.id
       }

@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const comments = await prisma.comment.findMany({
+    const comments = await db.comment.findMany({
       where: {
         productId: params.id
       },
@@ -41,7 +41,7 @@ export async function POST(
       return NextResponse.json({ error: 'Comment content is required' }, { status: 400 });
     }
 
-    const comment = await prisma.comment.create({
+    const comment = await db.comment.create({
       data: {
         name: session.user.name || 'Anonymous User',
         text: content,

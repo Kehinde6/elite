@@ -310,7 +310,7 @@ export async function GET() {
   try {
     console.log('Products API route called');
     
-    const products = await prisma.product.findMany({
+    const products = await db.product.findMany({
       include: {
         externalLinks: true,
         comments: true
@@ -337,7 +337,7 @@ export async function POST(req: Request) {
     const data = await req.json();
     const { name, description, image, category, price, brand } = data;
 
-    const product = await prisma.product.create({
+    const product = await db.product.create({
       data: {
         name,
         description,

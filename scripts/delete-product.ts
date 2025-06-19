@@ -1,11 +1,10 @@
 import db from '@/lib/db'
 
-const prisma = new PrismaClient();
 
 async function deleteProduct() {
   try {
     // Find the product with the specific image URL
-    const product = await prisma.product.findFirst({
+    const product = await db.product.findFirst({
       where: {
         image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
       }
@@ -17,7 +16,7 @@ async function deleteProduct() {
     }
 
     // Delete the product
-    await prisma.product.delete({
+    await db.product.delete({
       where: {
         id: product.id
       }
@@ -27,7 +26,7 @@ async function deleteProduct() {
   } catch (error) {
     console.error('Error deleting product:', error)
   } finally {
-    await prisma.$disconnect()
+    await db.$disconnect()
   }
 }
 
