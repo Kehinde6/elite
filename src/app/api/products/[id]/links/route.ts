@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import db from '@/lib/db';
 
 interface ExternalLink {
   id: string;
